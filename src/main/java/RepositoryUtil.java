@@ -15,11 +15,11 @@ import java.io.IOException;
  *
  * @author dominik.stadler at gmx.at
  */
-public class OpenRepository {
+public class RepositoryUtil {
 
-    public static Repository getRepo() throws IOException, GitAPIException {
+    public static Repository getRepo(String filePath) throws IOException, GitAPIException {
         // first create a test-repository, the return is including the .get directory here!
-        File repoDir =  new File("D:\\알고리즘\\하루하나알고리즘\\2021-algorithm-study", ".git");
+        File repoDir =  new File(filePath, ".git");
 
         // now open the resulting repository with a FileRepositoryBuilder
         FileRepositoryBuilder builder = new FileRepositoryBuilder();
@@ -27,13 +27,7 @@ public class OpenRepository {
                 .readEnvironment() // scan environment GIT_* variables
                 .findGitDir() // scan up the file system tree
                 .build()) {
-            /*System.out.println("Having repository: " + repository.getDirectory());
 
-            // the Ref holds an ObjectId for any type of object (tree, commit, blob, tree)
-
-            Ref head = repository.exactRef("refs/heads/main");
-
-            System.out.println("Ref of refs/heads/main: " + head);*/
             return repository;
         }
 
