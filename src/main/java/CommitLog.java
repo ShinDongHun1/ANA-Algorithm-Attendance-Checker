@@ -54,13 +54,14 @@ public class CommitLog implements Comparable<CommitLog>{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+
         CommitLog commitLog = (CommitLog) o;
-        return getLocalDateTime().getDayOfMonth() ==commitLog.getLocalDateTime().getDayOfMonth();
+        return (commitLog.getLocalDateTime().getYear()==localDateTime.getYear()) && (commitLog.getLocalDateTime().getMonth().equals(localDateTime.getMonth()))
+                &&(commitLog.getLocalDateTime().getDayOfMonth() == localDateTime.getDayOfMonth()) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getLocalDateTime());
+        return Objects.hash(getLocalDateTime().getYear()+"w"+getLocalDateTime().getMonth().getValue()+"w"+getLocalDateTime().getDayOfMonth());
     }
 }

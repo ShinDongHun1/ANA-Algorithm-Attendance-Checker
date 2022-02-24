@@ -11,7 +11,7 @@ public class ReadmeMaker {
 
     private final static int YEAR = 2022;
 
-   public final static String FIRST_FORMAT = "| 참여자 | 1일 | 2일 | 3일 | 4일 | 5일 | 6일 | 7일 | 8일 | 9일 | 10일 | 11일 | 12일 | 13일 | 14일 | 15일 | 16일 | 17일 | 18일 | 19일 | 20일 | 21일 | 22일 | 23일 | 24일 | 25일 | 26일 | 27일 | 28일 | 29일 | 30일 | 31일 | 횟수 |";
+   public final static String FIRST_FORMAT = "| 참여자 | 횟수 | 1일 | 2일 | 3일 | 4일 | 5일 | 6일 | 7일 | 8일 | 9일 | 10일 | 11일 | 12일 | 13일 | 14일 | 15일 | 16일 | 17일 | 18일 | 19일 | 20일 | 21일 | 22일 | 23일 | 24일 | 25일 | 26일 | 27일 | 28일 | 29일 | 30일 | 31일 |";
    public final static String SECOND_FORMAT = "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |";
 
 
@@ -47,17 +47,15 @@ public class ReadmeMaker {
                 member.sortCommitList();
 
                 int count =0;
+               
                 final List<CommitLog> commitLogList = member.getCommitLogList().stream().distinct().toList();
                 for (CommitLog commitLog : commitLogList) {
                     if(! (commitLog.getLocalDateTime().getMonth().getValue() == month) || YEAR != commitLog.getLocalDateTime().getYear()) continue;
-                    if(commitLog.getMember().getUsername().equals("ShinDongHun1")){
-                        System.out.println(commitLog.getLocalDateTime());
-                    }
-                    format = format.replace("{"+commitLog.getLocalDateTime().getDayOfMonth()+"}",CHECK_FORMAT);
+                    format = format.replace("{"+(commitLog.getLocalDateTime().getDayOfMonth()+1)+"}",CHECK_FORMAT);
                     count++;
                 }
 
-                format = format.replace("{32}",count+"");
+                format = format.replace("{1}",count+"");
                 bw.write(change(format));
                 bw.write("\n");
             }
