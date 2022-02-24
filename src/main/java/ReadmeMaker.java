@@ -47,7 +47,7 @@ public class ReadmeMaker {
                 member.sortCommitList();
 
                 int count =0;
-               
+
                 final List<CommitLog> commitLogList = member.getCommitLogList().stream().distinct().toList();
                 for (CommitLog commitLog : commitLogList) {
                     if(! (commitLog.getLocalDateTime().getMonth().getValue() == month) || YEAR != commitLog.getLocalDateTime().getYear()) continue;
@@ -56,6 +56,7 @@ public class ReadmeMaker {
                 }
 
                 format = format.replace("{1}",count+"");
+                if(count == 0) continue;
                 bw.write(change(format));
                 bw.write("\n");
             }
@@ -69,7 +70,7 @@ public class ReadmeMaker {
 
 
     public static String change(String format){
-       for(int i = 1; i <=31; i++){
+       for(int i = 2; i <=32; i++){
            format = format.replace("{"+i+"}", "");
        }
        return format;
