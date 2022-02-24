@@ -60,10 +60,8 @@ public class LogParser {
         final Instant commitInstant = Instant.ofEpochSecond(commit.getCommitTime());
         final ZoneId zoneId = commit.getAuthorIdent().getTimeZone().toZoneId();
 
-        ZonedDateTime authorDateTime = ZonedDateTime.ofInstant(commitInstant, zoneId);
+        final ZonedDateTime authorDateTime = ZonedDateTime.ofInstant(commitInstant, zoneId);
 
-        final String minute = authorDateTime.format(DateTimeFormatter.ofPattern("Z")).replace("+", "").replace("0", "");
-        authorDateTime= authorDateTime.minusMinutes(Integer.parseInt(minute));
 
         final String gitDateTimeFormatString = "yyyy:MMM:dd HH:mm:ss";
         final String formattedDate = authorDateTime.format(DateTimeFormatter.ofPattern(gitDateTimeFormatString));
